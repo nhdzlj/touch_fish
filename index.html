@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSDN开发者社区-让代码创造世界</title>
+  </head>
+  <body class="mode-blog">
+    <div id="app">
+      <!-- Top Navigation -->
+      <header class="csdn-nav">
+        <div class="logo">CSDN</div>
+        <nav class="nav-links">
+          <span class="nav-item active">首页</span>
+          <span class="nav-item">技术博客</span>
+          <span class="nav-item">农场</span>
+          <span class="nav-item">乐斗</span>
+          <span class="nav-item">我的好友 (1)</span>
+          <span class="nav-item">私信</span>
+          <span class="nav-item">义仓</span>
+        </nav>
+        <div class="nav-right">
+          <span class="nav-item">引导</span>
+          <span class="nav-item">🎨</span>
+          <span class="nav-item">🌙</span>
+          <span class="nav-item">👤 我的主页</span>
+          <span class="nav-item">🔗 分享</span>
+        </div>
+      </header>
+
+      <div class="workspace-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+          <div class="card">
+            <div class="card-title">⚙️ 我的工作台</div>
+            <div class="user-info-brief">
+              <div class="avatar-sm"></div>
+              <div class="user-level-box">
+                <div class="level-tag">皇 (lv1)</div>
+                <button class="sign-btn">已签到</button>
+              </div>
+            </div>
+            <div class="mini-btns">
+              <span class="mini-btn">主页</span>
+              <span class="mini-btn">个人</span>
+              <span class="mini-btn">书架</span>
+              <span class="mini-btn danger">退出</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📂 文档管理</div>
+            <div class="doc-tabs">
+              <span class="doc-tab active" id="tabBookshelf">我的书籍</span>
+            </div>
+            <div class="search-mini">
+              <input type="text" placeholder="输入关键词查询..." id="bookSearch" />
+              <button class="search-btn-sm">查询</button>
+            </div>
+            <ul class="doc-list" id="bookshelfList">
+              <li class="active">还没有导入书籍</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">👨‍💻 作者信息</div>
+            <div style="text-align: center; padding: 10px;">
+              <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">皇</div>
+              <div style="font-size: 13px; color: #666; margin-bottom: 15px;">博客等级：新手<br/>码龄：0年</div>
+              <div style="display: flex; justify-content: space-around; font-size: 13px;">
+                <div><strong>0</strong><br/><span style="color: #999;">原创</span></div>
+                <div><strong>0</strong><br/><span style="color: #999;">点赞</span></div>
+                <div><strong>0</strong><br/><span style="color: #999;">收藏</span></div>
+                <div><strong>0</strong><br/><span style="color: #999;">粉丝</span></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+          <div class="article-card">
+            <h1 class="content-title" id="articleTitle">n8n从入门到精通：掌握现代工作流自动化</h1>
+            <div class="content-meta">
+              <span>原创</span>
+              <span>2024-03-23 11:47:26</span>
+              <span>10w+ 阅读</span>
+              <span>73 点赞</span>
+              <span>999 收藏</span>
+            </div>
+            <div class="content-tags">
+              <span class="tag-item">人工智能</span>
+              <span class="tag-item">机器学习</span>
+              <span class="tag-item">深度学习</span>
+              <span class="tag-item">神经网络</span>
+            </div>
+            <div class="ad-banner">
+              <div>AIGC优质论文解读</div>
+              <button class="sign-btn">订阅专栏</button>
+            </div>
+            <div class="article-body" id="articleBody">
+              <p>请点击右侧的“上传文档”按钮导入您的 TXT 小说。</p>
+            </div>
+          </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+          <div class="card">
+            <div class="card-title">⚙️ 博客</div>
+            <div style="font-size: 13px; margin-bottom: 5px;">界面主题</div>
+            <select style="width: 100%; padding: 4px; font-size: 12px; margin-bottom: 10px;">
+              <option>CSDN 风格</option>
+              <option>极简白</option>
+              <option>极简黑</option>
+            </select>
+            <div style="font-size: 13px; margin-bottom: 5px;">博客内容</div>
+            <select style="width: 100%; padding: 4px; font-size: 12px;">
+              <option>n8n入门与实战</option>
+              <option>Spring Boot 最佳实践</option>
+            </select>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📩 邮件未验证</div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 10px;">
+              邮箱 3330376965@qq.com 尚未验证，验证后可解锁更多摸鱼功能。
+            </div>
+            <button class="sign-btn" style="width: 100%;">立即验证</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">⏫ 上传文档</div>
+            <div class="upload-novel-btn">
+              <input type="file" id="novelInput" accept=".txt" hidden />
+              <label for="novelInput" class="switch-btn" style="display: block; text-align: center;">上传本地文档</label>
+            </div>
+            <div class="mode-toggle" id="modeSwitchBtn">
+              <span id="modeStatusText">博客模式</span> <span>▲</span>
+            </div>
+            <div style="font-size: 11px; color: #999; text-align: center; margin-top: 10px;">
+              双击空格可快速切换模式
+            </div>
+
+            <div class="nav-section reader-only">
+              <div class="card-title">阅读导航</div>
+              <div class="progress-container">
+                <div style="display: flex; justify-content: space-between; font-size: 11px;">
+                  <span>进度</span>
+                  <span id="progressText">0 / 0</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="nav-pair">
+                <button class="nav-btn" id="prevBtn">上一页</button>
+                <button class="nav-btn" id="nextBtn">下一页</button>
+              </div>
+              <button class="switch-btn" style="margin-top: 10px; background: #ebf5ff; color: #0084ff; border: 1px solid #cce5ff;">开始听书</button>
+              <button class="mini-btn danger" style="width: 100%; margin-top: 5px;">已在书架</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">💡 加油站补给</div>
+            <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+              <span class="tag-item" style="background: #eef3fe; color: #0084ff;">社区可领</span>
+              <span class="tag-item" style="background: #ebf9eb; color: #15ad31;">农场可收</span>
+              <span class="tag-item" style="background: #fff0f0; color: #fc5531;">乐斗可战</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">💬 技术交流</div>
+            <ul class="doc-list" style="font-size: 11px;">
+              <li>(steal) 他要老板种地 <span>刚</span></li>
+              <li>老王 (lv11) 50体力只要1000 <span>1分前</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Chapter Directory (Right) -->
+      <aside class="right-sidebar" style="position: fixed; right: 20px; top: 500px; display: none;">
+         <!-- This could be implemented as a float menu or integrated in document management -->
+      </aside>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
