@@ -108,9 +108,32 @@ function setupEventListeners() {
       toggleMode();
     }
   });
+
+  // Scroll tracking for progress
+  let scrollTimer;
+  window.addEventListener('scroll', () => {
+    if (state.isReaderMode && state.activeBook) {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(async () => {
+        if (!state.activeBook.indexProgress) state.activeBook.indexProgress = {};
+        // Only save if it's a significant change or we are in reader mode
+        const currentPos = window.scrollY;
+        if (state.activeBook.indexProgress[state.activeBook.currentIdx] !== currentPos) {
+          state.activeBook.indexProgress[state.activeBook.currentIdx] = currentPos;
+          await saveBookToDB(state.activeBook);
+        }
+      }, 500);
+    }
+  });
 }
 
-function toggleMode() {
+async function toggleMode() {
+  if (state.isReaderMode && state.activeBook) {
+    if (!state.activeBook.indexProgress) state.activeBook.indexProgress = {};
+    state.activeBook.indexProgress[state.activeBook.currentIdx] = window.scrollY;
+    await saveBookToDB(state.activeBook);
+  }
+
   state.isReaderMode = !state.isReaderMode;
   document.body.className = state.isReaderMode ? 'mode-reader' : 'mode-blog';
   const text = $('modeStatusText');
@@ -167,7 +190,7 @@ function processNovelContent(id, title, text) {
     });
   }
 
-  return { id, title, content: text, chapters, currentIdx: 0, isChapterMode, pageSize: 2000 };
+  return { id, title, content: text, chapters, currentIdx: 0, isChapterMode, pageSize: 2000, indexProgress: {} };
 }
 
 async function render() {
@@ -250,7 +273,12 @@ public class LoggingAspect {
     elProgFill.style.width = percent + '%';
   }
 
-  window.scrollTo({ top: 0, behavior: 'instant' });
+  // Restore scroll position
+  const savedPos = (book.indexProgress && book.indexProgress[book.currentIdx]) || 0;
+  // Use a small timeout to ensure DOM has rendered and height is calculated
+  setTimeout(() => {
+    window.scrollTo({ top: savedPos, behavior: 'instant' });
+  }, 0);
 }
 
 function renderWelcome() {
@@ -343,6 +371,9 @@ async function changeNav(dir) {
   const limit = book.isChapterMode ? book.chapters.length : Math.ceil(book.content.length / book.pageSize);
   const nextIdx = book.currentIdx + dir;
   if (nextIdx >= 0 && nextIdx < limit) {
+    if (!book.indexProgress) book.indexProgress = {};
+    book.indexProgress[book.currentIdx] = window.scrollY;
+    
     book.currentIdx = nextIdx;
     await saveBookToDB(book);
     state.booksMetadata = await getAllBooksMetadata();
